@@ -35,7 +35,7 @@ export default function App() {
     // <Ex11 />    
     // <Ex12 />    
     // <Travel />    
-    // <Resort />    
-    <Health />    
+    <Resort />    
+    // <Health />    
   );
 }

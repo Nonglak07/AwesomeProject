@@ -1,7 +1,8 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
+import { View, Image } from 'react-native';
 
 export default function Section1() {
+    
     return (
         <View>
             <View style={{ flexDirection : "row"}}>

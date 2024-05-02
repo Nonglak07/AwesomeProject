@@ -1,9 +1,9 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Image, } from 'react-native';
+import { Text, View, } from 'react-native';
 import { FontAwesome } from "@expo/vector-icons";
-import MyIcon from "./MyIcon";
 
 export default function Section2() {
+    
     return (
         <View style={{ flex: 1, padding: 10}}>
             <View style={{ flexDirection: "row" }}>

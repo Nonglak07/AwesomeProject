@@ -1,8 +1,8 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, View, Image } from 'react-native';
-import { FontAwesome } from "@expo/vector-icons";
+import { Text, View } from 'react-native';
 
 export default function Section3() {
+    
     return (
         <View style={{  }}>
             {/* View ก้อนที่ 1  */}
@@ -15,7 +15,6 @@ export default function Section3() {
                     <Text style={{ color: "gray" }}>See 801 reviews</Text>
                 </View>
             </View>
-
         </View>    
 
         
