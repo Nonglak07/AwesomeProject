@@ -7,6 +7,7 @@ import Hotel from '../../components/week3/Hotel';
 import Menu from '../../components/week3/Menu';
 
 export default function Travel() {
+
     return (      
         <ScrollView>
             <View style={{ flex: 1, paddingTop : 50 }}>

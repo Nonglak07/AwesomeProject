@@ -10,6 +10,7 @@ import Section7 from '../../components/week3/Section7';
 import Section8 from '../../components/week3/Section8';
 
 export default function Resort() {
+
     return (
         <ScrollView>
             <View style={{ flex: 1, paddingTop: 20 }}>
