@@ -3,21 +3,50 @@ import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import BookStorage from "../../storages/BookStorage";
+import BookService from "../../services/BookService";
 
 export default function Book() {
-
     const navigation = useNavigation();
     const [books, setBooks] = useState([
-        { id: 1, name: "พัฒนา Application ด้วย React และ React Native", price: 330, image: "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-1.jpg", },
-        { id: 2, name: "พัฒนาเว็บแอพพลิเคชันด้วย Firebase ร่วมกับ React", price: 229, image: "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-2.jpg", },
-        { id: 3, name: "พัฒนา Web Apps ด้วย React Bootstrap + Redux", price: 349, image: "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-3.jpg", },
-        { id: 4, name: "พัฒนาเว็บแอพพลิเคชันด้วย React Redux+Bootstrap", price: 229, image: "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-4.jpg", },
+        {
+            id: 1,
+            name: "พัฒนา Application ด้วย React และ React Native",
+            price: 330,
+            image:
+                "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-1.jpg",
+        },
+        {
+            id: 2,
+            name: "พัฒนาเว็บแอพพลิเคชันด้วย Firebase ร่วมกับ React",
+            price: 229,
+            image:
+                "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-2.jpg",
+        },
+        {
+            id: 3,
+            name: "พัฒนา Web Apps ด้วย React Bootstrap + Redux",
+            price: 349,
+            image:
+                "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-3.jpg",
+        },
+        {
+            id: 4,
+            name: "พัฒนาเว็บแอพพลิเคชันด้วย React Redux+Bootstrap",
+            price: 229,
+            image:
+                "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-4.jpg",
+        },
     ]);
 
     const loadBooks = async () => {
-        let books = await BookStorage.readItems();
+        //let books = await BookStorage.readItems();
+        let books = await BookService.getItems();
         setBooks(books);
     };
+
+    useEffect(() => {
+        loadBooks();
+    }, []);
     useEffect(() => {
         // WHEN MOUNT AND UPDATE
         const unsubscribe = navigation.addListener("focus", () => {
@@ -30,14 +59,20 @@ export default function Book() {
     const [refresh, setRefresh] = useState(false);
 
     const BookItem = ({ item, index }) => (
-        <TouchableOpacity onPress={() => { navigation.navigate("BookDetail", { "id": item.id }); }} style={{
-            backgroundColor: "white", flex: 1, elevation: 5, borderRadius: 10, margin: 5, padding: 10,
-        }} >
+        <TouchableOpacity
+            onPress={() => {
+                navigation.navigate("BookDetail", { id: item.id });
+            }}
+            style={{ backgroundColor: "white", margin: 7, flex: 1, elevation: 5 }}
+        >
             <View style={{ flexDirection: "row" }}>
-                <Image style={{ flex: 1, resizeMode: "cover", aspectRatio: 1 / 1 }} source={{ uri: item.image }} />
+                <Image
+                    style={{ flex: 1, resizeMode: "cover", aspectRatio: 1 / 1 }}
+                    source={{ uri: item.image }}
+                />
             </View>
             <View style={{ padding: 10 }}>
-                <Text style={{ fontSize: 20, height: 70, marginVertical: 10 }}> {item.name} </Text>
+                <Text style={{ fontSize: 20 }}> {item.name} </Text>
                 <View style={{ flexDirection: "row" }}>
                     <Text style={{ fontSize: 20, color: "green" }}>{item.price}</Text>
                     <Text style={{ paddingTop: 6 }}> บาท</Text>
@@ -46,26 +81,21 @@ export default function Book() {
         </TouchableOpacity>
     );
 
-    const [products, setProducts] = useState([
-        { id: 1, name: "พัฒนา Application ด้วย React และ React Native", price: 330, image: "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-1.jpg", },
-        { id: 2, name: "พัฒนาเว็บแอพพลิเคชันด้วย Firebase ร่วมกับ React", price: 229, image: "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-2.jpg", },
-        { id: 3, name: "พัฒนา Web Apps ด้วย React Bootstrap + Redux", price: 349, image: "https://raw.githubusercontent.com/arc6828/myreactnative/master/assets/week9/book-3.jpg", },
-    ]);
-
     return (
-        <View>
+        <View style={{ flex: 1 }}>
             <FlatList
-                numColumns={1}
-                data={products}
-                keyExtractor={(item) => item.id.toString()}
+                data={books}
                 refreshing={refresh}
-                onRefresh={() => { loadBooks(); }}
-                renderItem={({ item, index }) => (<BookItem item={item} />)}
+                onRefresh={() => {
+                    loadBooks();
+                }}
+                numColumns={2}
+                keyExtractor={(item) => item.id.toString()}
+                renderItem={({ item, index }) => <BookItem item={item} />}
             />
-
             <TouchableOpacity
                 onPress={() => {
-                    navigation.navigate("BookForm", { "id": null });
+                    navigation.navigate("BookForm", { id: null });
                 }}
                 style={{
                     backgroundColor: "lightblue",
@@ -83,8 +113,6 @@ export default function Book() {
             >
                 <FontAwesome name="plus" size={40} />
             </TouchableOpacity>
-
         </View>
-
     );
 }
