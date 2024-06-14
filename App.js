@@ -24,6 +24,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeStack from './navigations/HomeStack';
 import BottomTab from './navigations/BottomTab';
 import RootStack from './navigations/RootStack';
+import { AuthContext, AuthContextProvider } from "./hooks/AuthContextProvider";
 import ChartKitScreen from './screens/week5/ChartKitScreen';
 
 export default function App() {
@@ -47,12 +48,14 @@ export default function App() {
     // <Home />    
     // <FlatListExample />    
     // <ChartKitScreen/>
-    <NavigationContainer>
-      {/* <HomeStack /> */}
-      {/* <BottomTab /> */}
-      <RootStack />
-    </NavigationContainer>
-    
+    <AuthContextProvider>
+      <NavigationContainer>
+        {/* <HomeStack /> */}
+        {/* <BottomTab /> */}
+        <RootStack />
+      </NavigationContainer>
+    </AuthContextProvider>
+
 
   );
   // );
